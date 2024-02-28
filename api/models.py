@@ -42,7 +42,7 @@ class Country(models.Model):
 
 class Company(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     address = models.CharField(max_length=250)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
@@ -74,19 +74,19 @@ class Experience(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='experience_created_by')
     modified_at = models.DateTimeField(auto_now=True)
     modified_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='experience_modified_by')
 
     def __str__(self):
-        return self.position
+        return self.position.name
 
 class Technology(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField()
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='images/', default='images/18961868.jpg')
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='techonology_created_by')
     modified_at = models.DateTimeField(auto_now=True)
@@ -100,8 +100,8 @@ class Technology(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField()
-    technology = models.ManyToManyField(Technology)
+    description = models.TextField(null=True, blank=True)
+    technology = models.ManyToManyField(Technology, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='category_created_by')
     modified_at = models.DateTimeField(auto_now=True)
@@ -115,8 +115,8 @@ class Category(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length=200)
-    description = models.TextField()
-    technology = models.ManyToManyField(Technology)
+    description = models.TextField(null=True, blank=True)
+    technology = models.ManyToManyField(Technology, blank=True)
     reated_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_created_by')
     modified_at = models.DateTimeField(auto_now=True)
