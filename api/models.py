@@ -43,6 +43,7 @@ class Country(models.Model):
 class Company(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='images/', default='images/18961868.jpg')
     address = models.CharField(max_length=250)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     province = models.ForeignKey(Province, on_delete=models.CASCADE)
@@ -117,6 +118,7 @@ class Project(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     technology = models.ManyToManyField(Technology, blank=True)
+    image = models.ImageField(upload_to='images/', default='images/18961868.jpg')
     reated_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='project_created_by')
     modified_at = models.DateTimeField(auto_now=True)

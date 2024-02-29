@@ -76,6 +76,9 @@ class CategorySerializer(serializers.ModelSerializer):
     depth = 1
 
 class ProjectSerializer(serializers.ModelSerializer):
+
+    technology = TechnologySerializer(read_only=True, many=True)
+    
     class Meta:
         model = Project
         fields = '__all__'
