@@ -13,5 +13,5 @@ router.register('categories', CategoryViewSets, basename='categories')
 router.register('projects', ProjectViewSets, basename='projects')
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
 ]
